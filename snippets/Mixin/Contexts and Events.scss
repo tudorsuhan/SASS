@@ -1,0 +1,78 @@
+1.Events
+
+// Event wrapper
+// @author Harry Roberts
+// @param {Bool} $self (false) - Whether or not to include current selector
+// @see https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+
+// Mixin
+@mixin on-event($self: false) {
+    @if $self {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+}
+
+
+// Example
+.my-element {
+    color: red;
+
+    @include on-event {
+        color: blue;
+    }
+}
+
+.my-element {
+    @include on-event($self: true) {
+        color: blue;
+    }
+}
+
+
+// Output
+.my-element,
+.my-element:hover,
+.my-element:active,
+.my-element:focus {
+    color: blue
+}
+
+
+
+3.Contexts
+
+// Contexts
+// @author Hugo Giraudel
+// @param {String | List} $context
+
+// Mixin
+@mixin when-inside($context) {
+    #{$context} & {
+        @content;
+    }
+}
+
+
+// Example
+.my-element {
+    display: flex;
+
+    @include when-inside('.no-flexbox') {
+        display: table;
+    }
+}
+
+
+PS:
+https://css-tricks.com/snippets/sass/simplifying-contexts-events/

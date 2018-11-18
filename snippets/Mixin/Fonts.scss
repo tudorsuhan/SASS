@@ -1,0 +1,12 @@
+@mixin sans() {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 400;
+}
+@mixin sans-bold() {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 700;
+}
+@mixin serif() {
+  font-family: "Georgia", serif;
+  font-weight: 700;
+}

@@ -1,0 +1,33 @@
+{
+    "presets": [
+        ["env", {
+            "targets": {
+                "node": "current",
+                "browsers": ["last 2 versions", "ie >= 7"]
+            },
+            "modules": false,
+            "debug": false, 
+            "useBuiltIns": false
+        }]
+    ],
+
+    "plugins": [
+        ["transform-class-properties", { 
+            "spec": true 
+        }],
+        ["transform-runtime", {
+            "helpers": false,
+            "polyfill": true,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+        }],
+        ["transform-async-to-generator"],
+        ["transform-object-rest-spread"],
+        ["transform-do-expressions"],
+        ["transform-async-to-module-method", {
+            "module": "bluebird",
+            "method": "coroutine"
+        }],
+        ["transform-async-generator-functions"]
+    ]
+}

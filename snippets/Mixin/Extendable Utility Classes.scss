@@ -1,0 +1,12 @@
+No Select
+
+Sometimes it’s nice disable selection on an element. I usually use this for buttons and other UI elements. I find it helps create a more native feel.
+
+%noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,11 @@
+$value: 42;
+$length: $value + px;
+// 42px
+
+$value: 42;
+$length: $value + 0px;
+// 42px
+
+$value: 42;
+$length: $value * 1px;
+// 42px

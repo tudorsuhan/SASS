@@ -1,0 +1,13 @@
+// On Help & Support Main Page
+.blog-card-help {
+    background: #066A81;
+    &:hover {
+        box-shadow: none;
+    }
+    &__title {
+        font-size: 1.2em;
+        p {
+            color: #fff;
+        }
+    }
+}

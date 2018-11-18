@@ -1,0 +1,50 @@
+I love how writing Sass lets me think like a programmer when I'm writing CSS. 
+It's very satisfying to refactor and abstract the methods behind successful techniques to make 
+them reusable and portable for the next project.
+
+Pro tip: Use functions when you need to calculate a value that may be reused somewhere else.
+
+In Ethan Marcotte's lovely new book Responsive Web Design, 
+he stresses the formula for calculating the percent value for a width so you can achieve a 
+fluid layout based on a reference design made using pixels.
+
+target / context = result
+
+So if you have a container that's 1000px wide, and a module that's designed to be 650px wide, that calculation becomes:
+
+650px / 1000px = 65% 
+
+That's as clear a case for a function as I can imagine. 
+It would be overkill to work that logic into each mixin for a site, and even worse to do those calculations in line. 
+So in a recent project I just created a little function, like so:
+
+// Function
+@function calc-percent($target, $container) {
+  @return ($target / $container) * 100%;
+}
+
+Pro tip: Create short-names for functions and mixins that you will be using often.
+
+For example, for the above function, I created the short-name below. 
+It simply collects the needed arguments, and passes it along to its sister with the longer name, and then returns the value.
+
+// Function
+@function cp($target, $container) {
+  @return calc-percent($target, $container);
+}
+
+// Example
+.my-module {
+  width: calc-percent(650px, 1000px);
+}
+
+or
+
+.my-module {
+  width: cp(650px, 1000px);
+}
+
+// Output
+.my-module {
+  width: 65%;
+}

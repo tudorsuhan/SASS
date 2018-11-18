@@ -1,0 +1,20 @@
+A function is very similar to a mixin, however the output from a function is a single value. 
+This can be any Sass data type, including: numbers, strings, colors, booleans, or lists.
+
+The following function can accept 2 arguements, $some-number and $another-number. 
+The value returned are those two variables added together.
+
+// Function for calculate padding
+@function my-calculation-function($some-number, $another-number){
+  @return $some-number + $another-number
+}
+
+// Example
+.my-module {
+  padding: my-calculation-function(10px, 5px);
+}
+
+// Output:
+.my-module {
+  padding: 15px;
+}

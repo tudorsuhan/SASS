@@ -1,0 +1,19 @@
+// Mixin
+@mixin linx ($link, $visit, $hover, $active) {
+  a {
+    color: $link;
+    &:visited {
+      color: $visit;
+    }
+    &:hover {
+      color: $hover;   
+    }
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+
+// Example
+@include link-colors(#00c, #0cc, #c0c, #ccc, #cc0);

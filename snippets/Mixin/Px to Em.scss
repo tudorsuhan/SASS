@@ -1,0 +1,34 @@
+The em() Sass function
+
+$browser-context: 16; // Default
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+
+//un-modified
+@function calc-em($target-px, $context) {
+  @return ($target-px / $context) * 1em;
+}
+// and modified to accept a base context variable
+$browser-context: 16;
+@function em($pixels, $context: $browser-context) {
+  @return ($pixels / $context) * 1em;
+}
+
+
+$browser-context: 16;
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  
+  
+  
+  PS:
+  https://css-tricks.com/snippets/sass/px-to-em-functions/
+  @return $pixels / $context * 1em;
+}

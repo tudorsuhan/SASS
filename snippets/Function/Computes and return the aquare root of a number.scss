@@ -1,0 +1,13 @@
+/// Computes and returns the square root of a number.
+
+@function math-sqrt($num) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($num)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}

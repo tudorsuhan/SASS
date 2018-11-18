@@ -1,0 +1,33 @@
+
+/// Converts the given number to one with the em-unit
+/// @param {Number} $value - The number to convert.
+
+@function em($value){
+  @if unit($value) != "em"{
+    @return $value * 1em;
+  } @else {
+    @return $value;
+  }
+}
+
+/// Converts the given number to one with the rem-unit
+/// @param {Number} $value - The number to convert.
+
+@function rem($value){
+  @if unit($value) != "rem"{
+    @return $value * 1rem;
+  } @else {
+    @return $value;
+  }
+}
+
+/// Converts the given number to one with the px-unit
+/// @param {Number} $value - The number to convert.
+
+@function px($value){
+  @if unit($value) != "px"{
+    @return $value * 1px;
+  } @else {
+    @return $value;
+  }
+}

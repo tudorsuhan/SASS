@@ -1,0 +1,30 @@
+The if function returns one of two values, depending on whether or not $condition is true. 
+Just like in @if, all values other than false and null are considered to be true.
+There has long been a bug with this function where all arguments where evaluated, no matter the result of the condition.
+
+
+// Instead of:
+// $value: if(length($list) > 2, nth($list, 3), nth($list, 1));
+$value: nth($list, 1);
+
+@if length($list) > 2 {
+  $value: nth($list, 3);
+}
+
+
+
+// Positive @if
+@if $something {
+    // Do something when `$something` is truthy
+} @else if $something-else {
+    // Do something else when `$something` is falsy
+    // but `$something-else` is thruty
+} @else {
+    // When everything else has failed
+}
+
+
+// Negative @if
+@if not $something {
+    // Do something when `$something` is falsy
+}

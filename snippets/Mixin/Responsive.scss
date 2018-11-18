@@ -1,0 +1,13 @@
+@mixin responsive($mode) {
+  @if $mode == "landscape"{
+    @if $output-variant == $mode{
+      @content;
+    }
+  } @else if $mode == "portrait"{
+    @if $output-variant == $mode{
+      @content;
+    }
+  } @else{
+    @debug("Invalid responsive mode: #{$mode}")
+  }
+}

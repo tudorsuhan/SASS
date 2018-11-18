@@ -1,0 +1,103 @@
+// Mixin (in version 3.2)
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+      @if $vendors {
+        @each $vendor in $vendors {
+          #{"-" + $vendor + "-" + $property}: #{$value};
+        }
+      }
+      #{$property}: #{$value};
+}
+
+
+// Example
+.element {
+  @include prefix(transform, rotate(42deg), webkit ms);
+}
+
+
+// Output
+.element {
+  -webkit-transform: rotate(42deg);
+  -ms-transform: rotate(42deg);
+  transform: rotate(42deg);
+}
+
+
+
+// Mixin (in version 3.3)
+@mixin prefix($map, $vendors: webkit moz ms o) {
+  @each $prop, $value in $map {
+        @if $vendors {
+          @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $prop}: #{$value};
+          }
+        }
+        // Dump regular property anyway
+        #{$prop}: #{$value};
+  }
+}
+
+
+// Example
+.element {
+  @include prefix((transform: translate(-50%, -50%)), webkit ms);
+}
+
+.other-element {
+  @include prefix((
+    column-count: 3,
+    column-gap: 1em,
+    column-rule: 1px solid silver,
+    column-width: 20em
+  )), webkit moz);
+}
+
+
+// Output
+.element {
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.other-element {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  -webkit-column-rule: 1px solid silver;
+  -moz-column-rule: 1px solid silver;
+  column-rule: 1px solid silver;
+  -webkit-column-width: 20em;
+  -moz-column-width: 20em;
+  column-width: 20em;
+}
+
+
+What’s cool with this mixin is it can easily be used in other mixins to avoid having to type prefix() 
+and the vendor prefixes every time. Think of something like this:
+
+// Mixin
+@mixin transform($value) {
+      @include prefix(transform, $value, webkit ms);
+}
+
+@mixin column-count($value) {
+      @include prefix(column-count, $value, webkit moz);
+}
+
+
+// Example
+.element {
+  @include transform(rotate(42deg));
+}
+
+
+// Output
+.element {
+  -webkit-transform: rotate(42deg);
+  -ms-transform: rotate(42deg);
+  transform: rotate(42deg);
+}

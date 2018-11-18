@@ -1,0 +1,169 @@
+// =============================================================================================
+//    CORE DEFAULTS
+// =============================================================================================
+
+// Default output variant
+$output-variant: null !default;
+
+
+
+
+// =============================================================================================
+//    CONSTANTS
+// =============================================================================================
+
+// The standard constant for a golden ratio
+$golden-ratio: 1.61803398875;
+
+
+
+// =============================================================================================
+//    LAYOUT SCALING
+// =============================================================================================
+
+// The calculations here for base size to rem are just for demonstration:
+// The JavaScript implementation, which calculates the actual base size, might differ from this idea.
+//
+// LANDSCAPE:
+//   1440px at base size == 24px => 60rem
+//   1320px at base size == 22px => 60rem
+//   1200px at base size == 20px => 60rem
+//   1080px at base size == 18px => 60rem
+//    960px at base size == 16px => 60rem
+//
+// PORTRAIT:
+//    450px at base size == 18px => 25rem
+//    400px at base size == 16px => 25rem
+//    350px at base size == 14px => 25rem
+//    300px at base size == 12px => 25rem
+
+// Logic wise we choose something a little more advanced than demonstrated above. We
+// implemented some kind of slowly growing algorithm which uses not every additional
+// pixel for scaling but also over propotionally increases the wide space on the sides.
+// For details on this please refer to the JavaScript implementation part.
+
+// Static vs. Dynamic layout:
+// While we keep the layout fully static for the rich landscape layout, we allow some
+// additional non scale growth for the portrait mode. Typically in portrait we don't have
+// these super complex and structured layouts therefor it's easier to support some kind
+// of variance here without breaking the layout intentions. The landscape-width defined here
+// is totally fix while the $portrait-width is the actual median width. This median is calulated
+// based on the idea that affected devices (larger smartphones or phablets) offer (CSS sizes):
+//
+// - 320px at base size == 16px => 20rem (~iPhone 5)
+// - 360px at base size == 16px => 22rem (~Samsung S3/S4)
+// - 375px at base size == 17px => 22rem (~iPhone 6)
+// - 414px at base size == 18px => 23rem (~iPhone 6 Plus)
+//
+// This way we allow for putting more content in front of the user when the portrait
+// oriented device is larger, but also follow the idea of viewing distances that
+// larger devices are generally hold a little more far away where everything is getting smaller.
+//
+// All base sizes are applied floored. This means that for compensation of rounding we add
+// some more additional white space around the content container (which is centered in the middle).
+
+$landscape-width: 60rem !default;
+$landscape-content-padding: 4rem !default;
+$landscape-content-width: $landscape-width - $landscape-content-padding - $landscape-content-padding;
+
+$portrait-width: 25rem !default;
+$portrait-content-padding: 1rem !default;
+$portrait-content-width: $portrait-width - $portrait-content-padding - $portrait-content-padding;
+
+
+
+// =============================================================================================
+//    TYPOGRAPHY
+// =============================================================================================
+
+// Effectively 16px (default size) * 1.5 => 24px (or bigger)
+$font-opentype-threshold: 1.5rem !default;
+
+///
+/// Maps all supported font families with their internal short identifier to the
+/// official CSS font family.
+///
+$font-families: (
+
+) !default;
+
+///
+/// Maps font size names to their power of value.
+///
+/// Using modular scale for harmonious font size cascade
+/// Increase sizes more when the device offer more width where text flows better
+/// when bigger and big headlines work fine only when you have some amount of
+/// horizontal space available. Typical scales could be found here: http://www.modularscale.com/
+///
+$font-sizes-map : (
+  mini : -2,
+  small : -1,
+  normal : 0,
+  large : 1,
+  huge : 2,
+  giant : 3
+) !default;
+
+///
+/// Maps the base size of each font family to a scaling factor for computing the number
+/// of characters per 1rem of width. As fonts scales uniform we can use this base behavior
+/// for computing the number of characters for arbitrary font sizes and container widths.
+///
+$font-tracking-map: (
+  sans: 2,
+  serif: 2,
+  mono: 2
+) !default;
+
+///
+/// Scaling of font size based required on the different font sizes
+/// to have visual same size output.
+/// This is helpful for a clean modular scale between different font sizes
+/// to sync them to the same user perceived size/x-height.
+///
+$font-harmonizing-map: (
+  sans: 1,
+  serif: 1,
+  mono: 1
+) !default;
+
+///
+/// Configuration for all possible layout options with configured font settings like
+/// modular scale to use, the base size, and ranges for both tracking and leading
+/// to allow optimal text flow.
+///
+$layout-config: (
+  // Orientation Values:
+  // - SmashingMagazine: Max 18px FontSize = 77 Buchstaben/Zeile
+  // - Medium: 22px FontSize - 76 Buchstaben/Zeile
+  // - Quartz: Text-Body-Max: 640px + 20px Font + Figcaption in 12px; Buttons in 15px;
+  landscape : (
+    scale : 1.3,
+    base : 1.125rem, // 18px
+
+    min-tracking : 35,
+    min-leading : 1.3,
+
+    max-tracking : 85,
+    max-leading : 1.6,
+
+    smart-leading: 0.2
+  ),
+
+  // Orientation Values:
+  // - iOS minimum font size is 11px by human interface guidelines
+  // - iOS standard font size for body text is 17px
+  // - Instapaper used 14px with Verdana as default font size for reading (now uses Elena)
+  portrait : (
+    scale : 1.15,
+    base : 1rem, // 16px
+
+    min-tracking : 25,
+    min-leading : 1.1,
+
+    max-tracking : 45,
+    max-leading : 1.5,
+
+    smart-leading: 0.1
+  )
+) !default;

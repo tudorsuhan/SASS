@@ -1,0 +1,50 @@
+1.Positive integer exponents
+
+// Function
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+
+// Example
+.foo {
+  width: pow(20, 2) * 1px; // 400px
+}
+
+
+2.Positive or negative integer exponents
+
+// Function
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
+  }
+
+  @return $value;
+}
+
+
+// Example
+.foo {
+  width: pow(10, -2) * 1px; // 0.0001px
+}
+
+
+PS:
+https://css-tricks.com/snippets/sass/power-function/

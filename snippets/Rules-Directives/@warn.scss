@@ -1,0 +1,8 @@
+The @error directive throws the value of a SassScript expression as a fatal error, including a nice stack trace. 
+It’s useful for validating arguments to mixins and functions.
+
+
+@if ($condition) {
+  @warn $error;
+  @return null;
+}

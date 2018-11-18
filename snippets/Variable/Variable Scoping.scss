@@ -1,0 +1,7 @@
+Not all engines work with the same variable scoping mechanism. 
+Actually, some don’t have variable scoping at all, which means all variables live in the same global environment (and can overlap). 
+Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin…) 
+if it’s not set with the !global flag.
+
+This can be detected with:
+feature-exists("global-variable-shadowing") == true

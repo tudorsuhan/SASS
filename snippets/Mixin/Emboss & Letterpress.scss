@@ -1,0 +1,33 @@
+1.Emboss
+
+Although the design world seems to be slowly moving away from pseudo-realism thanks to Microsoft’s Metro UI (who would’ve thought!), 
+shadows and highlights are still very useful tools for web and UI design.
+
+The only problem is that CSS shadows are clumsy. 
+Compass does take away some of the pain of using them thanks to its box-shadow mixin, but we can do even better.
+
+It won’t take you long browsing Dribbble to realize that 90% of shadows and highlights are the same type: 
+semi-transparent one-pixel lines placed above and below an element to give the illusion it’s embossed in its parent.
+
+// Mixin
+@mixin box-emboss($opacity, $opacity2){
+    box-shadow:white($opacity) 0 1px 0, inset black($opacity2) 0 1px 0;
+}
+
+
+// Example
+.box{
+    @include box-emboss(0.8, 0.05);
+}
+
+
+2.Letterpress
+
+Similarly, another common effect is the “letterpress” style, where the same “embossing” effect is applied to text. 
+The thin white line not only simulates letterpress printing, 
+but also makes the text more readable by providing a sharper separation between the letters and their background:
+
+// Mixin
+@mixin letterpress($opacity){
+    text-shadow:white($opacity) 0 1px 0;
+}

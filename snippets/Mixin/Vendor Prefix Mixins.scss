@@ -1,0 +1,55 @@
+// Border Radius
+@mixin radius($top-left, $top-right, $bottom-right, $bottom-left) {
+  -moz-border-radius: $top-left $top-right $bottom-right $bottom-left;
+  -webkit-border-radius: $top-left $top-right $bottom-right $bottom-left;
+  border-radius: $top-left $top-right $bottom-right $bottom-left;
+}
+
+
+//Transition
+@mixin transition($transition) {
+  -moz-transition: unquote($transition);
+  -o-transition: unquote($transition);
+  -webkit-transition: unquote($transition);
+  transition: unquote($transition);
+}
+
+
+// Transform
+@mixin transform($transforms) {
+  -moz-transform: unquote($transforms);
+  -o-transform: unquote($transforms);
+  -ms-transform: unquote($transforms);
+  -webkit-transform: unquote($transforms);
+  transform: unquote($transforms);
+}
+
+
+// Keyframes
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }  
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }  
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+
+// Animation
+@mixin animation($str) {
+  -webkit-animation: unquote($str};
+  -moz-animation: unquote($str};
+  -ms-animation: unquote($str};
+  -o-animation: unquote($str};
+  animation: unquote($str};     
+}

@@ -1,0 +1,24 @@
+It is possible to assign several variables at once in an @each loop, which turns out to be especially useful when iterating over maps. 
+For instance, @each $key, $value in $map. Learn more about multi-assignment.
+
+
+@each $item in $map {
+  $key: nth($item, 1);
+  $value: nth($item, 2);
+  // Do something
+}
+
+
+The @each directive can also use multiple variables, as in @each $var1, $var2, ... in <list>. 
+If <list> is a list of lists, each element of the sub-lists is assigned to the respective variable.
+
+
+@each $animal, $color, $cursor in (puma, black, default),
+                                  (sea-slug, blue, pointer),
+                                  (egret, white, move) {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}

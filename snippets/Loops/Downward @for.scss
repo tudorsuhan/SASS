@@ -1,0 +1,8 @@
+For long, there was no way to have decrementing @for loops. 
+They could only go upward. No error was thrown, but it simply did not iterate.
+
+
+@for $i from -10 through -1 {
+  $i: abs($i);
+  // Do something
+}

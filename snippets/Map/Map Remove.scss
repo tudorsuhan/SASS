@@ -1,0 +1,9 @@
+Some engines cannot remove multiple keys of a map at once with the map-remove function.
+
+
+@function map-multi-remove($map, $keys...) {
+  @each $key in $keys {
+    $map: map-remove($map, $key);
+  }
+  @return $map;
+}

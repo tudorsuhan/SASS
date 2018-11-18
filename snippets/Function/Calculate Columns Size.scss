@@ -1,0 +1,12 @@
+$col-count: 12;
+
+// Function
+@function col-pct($columns) {
+    @return unquote((100/$col-count)*$columns+"%");
+}
+
+// Example
+.col-6 { width: col-pct(6);}
+
+// Output
+.col-6 { width: 50%; }
